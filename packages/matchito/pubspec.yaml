@@ -8,7 +8,7 @@ environment:
   sdk: ^3.7.0
 
 dependencies:
-  matchito_annotation: ^0.0.1
+  matchito_annotation:
   source_gen: ^1.2.3
 
 dev_dependencies:
