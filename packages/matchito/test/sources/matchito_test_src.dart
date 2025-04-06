@@ -65,4 +65,5 @@ class Bar {
 class Baz extends Bar {
   Baz({required this.quick, required super.bam, super.baz});
   final String quick;
+  final int copyWith = 0;
 }
