@@ -1,0 +1,3 @@
+dependency_overrides:
+  matchito_annotation:
+    path: ../matchito_annotation
