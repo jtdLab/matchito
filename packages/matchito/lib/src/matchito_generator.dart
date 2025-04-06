@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/src/builder/build_step.dart';
@@ -43,54 +44,57 @@ class MatchitoGenerator extends GeneratorForAnnotation<Matchito> {
 
     yield 'const _sentinel = Object();';
     for (final type in types) {
-      final typeName = type.getDisplayString();
-      final typeElement = type.element as ClassElement?;
-      final parameters = {
-        ...?typeElement?.fields
-            .where(
-              (field) =>
-                  !field.isStatic &&
-                  field.name != 'copyWith' &&
-                  field.name != 'hashCode' &&
-                  field.name != 'runtimeType' &&
-                  !field.name.startsWith('_'),
-            )
-            .map((field) => field.name),
-        ...?typeElement?.allSupertypes
-            .expand((supertype) => supertype.element.fields)
-            .where(
-              (field) =>
-                  !field.isStatic &&
-                  field.name != 'copyWith' &&
-                  field.name != 'hashCode' &&
-                  field.name != 'runtimeType' &&
-                  !field.name.startsWith('_'),
-            )
-            .map((field) => field.name),
-      };
+      try {
+        final typeName = type.getDisplayString();
+        final typeElement = type.element as ClassElement?;
+        final parameters = {
+          ...?typeElement?.fields
+              .where(
+                (field) =>
+                    !field.isStatic &&
+                    field.name != 'copyWith' &&
+                    field.name != 'hashCode' &&
+                    field.name != 'runtimeType' &&
+                    !field.name.startsWith('_'),
+              )
+              .map((field) => field.name),
+          ...?typeElement?.allSupertypes
+              .expand((supertype) => supertype.element.fields)
+              .where(
+                (field) =>
+                    !field.isStatic &&
+                    field.name != 'copyWith' &&
+                    field.name != 'hashCode' &&
+                    field.name != 'runtimeType' &&
+                    !field.name.startsWith('_'),
+              )
+              .map((field) => field.name),
+        };
 
-      if (parameters.isEmpty) {
-        yield 'Matcher is$typeName() => isA<$typeName>();';
-      } else {
-        final parameterMatchers = parameters
-            .map((param) {
-              return '''
+        if (parameters.isEmpty) {
+          yield 'Matcher is$typeName() => isA<$typeName>();';
+        } else {
+          final parameterList = parameters
+              .map((param) => 'Object? $param = _sentinel')
+              .join(', ');
+          final parameterMatchers = parameters
+              .map((param) {
+                return '''
       if ($param != _sentinel) {
         matcher = matcher.having((e) => e.$param, '$param', $param);
       }
     ''';
-            })
-            .join('\n');
+              })
+              .join('\n');
 
-        final parameterList = parameters
-            .map((param) => 'Object? $param = _sentinel')
-            .join(', ');
-
-        yield 'Matcher is$typeName({$parameterList}) {';
-        yield '  var matcher = isA<$typeName>();';
-        yield parameterMatchers;
-        yield '  return matcher;';
-        yield '}';
+          yield 'Matcher is$typeName({$parameterList}) {';
+          yield '  var matcher = isA<$typeName>();';
+          yield parameterMatchers;
+          yield '  return matcher;';
+          yield '}';
+        }
+      } catch (e) {
+        stderr.writeln(e.toString());
       }
     }
   }
