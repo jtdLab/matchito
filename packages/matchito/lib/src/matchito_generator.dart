@@ -50,6 +50,7 @@ class MatchitoGenerator extends GeneratorForAnnotation<Matchito> {
             .where(
               (field) =>
                   !field.isStatic &&
+                  field.name != 'copyWith' &&
                   field.name != 'hashCode' &&
                   field.name != 'runtimeType' &&
                   !field.name.startsWith('_'),
@@ -60,6 +61,7 @@ class MatchitoGenerator extends GeneratorForAnnotation<Matchito> {
             .where(
               (field) =>
                   !field.isStatic &&
+                  field.name != 'copyWith' &&
                   field.name != 'hashCode' &&
                   field.name != 'runtimeType' &&
                   !field.name.startsWith('_'),
