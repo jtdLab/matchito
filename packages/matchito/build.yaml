@@ -2,6 +2,6 @@ builders:
   matchito:
     import: "package:matchito/builder.dart"
     builder_factories: ["matchito"]
-    build_extensions: { ".dart": [".matchito.dart"] }
+    build_extensions: { ".dart": [".matchers.dart"] }
     auto_apply: dependents
     build_to: source
