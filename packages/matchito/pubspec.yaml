@@ -3,12 +3,14 @@ description: Code generation for matchito mocktail mocks.
 version: 0.0.1
 repository: https://github.com/jtdLab/matchito
 issue_tracker: https://github.com/jtdLab/matchito/issues
+publish_to: none
 
 environment:
   sdk: ^3.7.0
 
 dependencies:
   matchito_annotation:
+    path: ../matchito_annotation
   source_gen: ^1.2.3
 
 dev_dependencies:
