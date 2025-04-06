@@ -45,13 +45,27 @@ class MatchitoGenerator extends GeneratorForAnnotation<Matchito> {
     for (final type in types) {
       final typeName = type.getDisplayString();
       final typeElement = type.element as ClassElement?;
-      final parameters =
-          typeElement?.fields
-              .where((field) => !field.isStatic)
-              .map((field) => field.name)
-              .toList();
+      final parameters = {
+        ...?typeElement?.fields
+            .where(
+              (field) =>
+                  !field.isStatic &&
+                  field.name != 'hashCode' &&
+                  field.name != 'runtimeType',
+            )
+            .map((field) => field.name),
+        ...?typeElement?.allSupertypes
+            .expand((supertype) => supertype.element.fields)
+            .where(
+              (field) =>
+                  !field.isStatic &&
+                  field.name != 'hashCode' &&
+                  field.name != 'runtimeType',
+            )
+            .map((field) => field.name),
+      };
 
-      if (parameters == null || parameters.isEmpty) {
+      if (parameters.isEmpty) {
         yield 'Matcher is$typeName() => isA<$typeName>();';
       } else {
         final parameterMatchers = parameters
