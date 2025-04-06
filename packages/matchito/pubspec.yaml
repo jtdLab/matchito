@@ -11,7 +11,7 @@ environment:
 dependencies:
   matchito_annotation:
     path: ../matchito_annotation
-  source_gen: ^1.2.3
+  source_gen: ^2.0.0
 
 dev_dependencies:
   source_gen_test: ^1.1.1
