@@ -88,10 +88,15 @@ class MatchitoGenerator extends GeneratorForAnnotation<Matchito> {
               .join('\n');
 
           yield 'Matcher is$typeName({$parameterList}) {';
+          stderr.writeln('Matcher is$typeName({$parameterList}) {');
           yield '  var matcher = isA<$typeName>();';
+          stderr.writeln('  var matcher = isA<$typeName>();');
           yield parameterMatchers;
+          stderr.writeln(parameterMatchers);
           yield '  return matcher;';
+          stderr.writeln('  return matcher;');
           yield '}';
+          stderr.writeln('}');
         }
       } catch (e) {
         stderr.writeln(e.toString());
