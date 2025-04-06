@@ -1,4 +1,4 @@
-// ignore_for_file: unused_element
+// ignore_for_file: unused_element, unused_field
 
 import 'package:matchito_annotation/matchito_annotation.dart';
 import 'package:source_gen_test/annotations.dart';
@@ -56,9 +56,10 @@ abstract class _TestClass2 {}
 class Foo {}
 
 class Bar {
-  Bar({required this.bam, this.baz = 0});
+  Bar({required this.bam, this.baz = 0}) : _quick = 0;
   final String bam;
   final int baz;
+  final int _quick;
 }
 
 class Baz extends Bar {

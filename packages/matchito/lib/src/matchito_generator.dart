@@ -51,7 +51,8 @@ class MatchitoGenerator extends GeneratorForAnnotation<Matchito> {
               (field) =>
                   !field.isStatic &&
                   field.name != 'hashCode' &&
-                  field.name != 'runtimeType',
+                  field.name != 'runtimeType' &&
+                  !field.name.startsWith('_'),
             )
             .map((field) => field.name),
         ...?typeElement?.allSupertypes
@@ -60,7 +61,8 @@ class MatchitoGenerator extends GeneratorForAnnotation<Matchito> {
               (field) =>
                   !field.isStatic &&
                   field.name != 'hashCode' &&
-                  field.name != 'runtimeType',
+                  field.name != 'runtimeType' &&
+                  !field.name.startsWith('_'),
             )
             .map((field) => field.name),
       };
