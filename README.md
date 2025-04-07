@@ -1,6 +1,6 @@
 # Matchito
 
-Ready to use matcher for every dart object.
+Ready to use matchers for every dart object.
 
 # How to use
 
@@ -80,7 +80,7 @@ void main() {
 
     test('dog', () {
         final dog = Dog(name: 'Tom', race: 'Beagle');
-        expect(cat, isDog(name: 'Tom', race: startsWith('Bea')));
+        expect(dog, isDog(name: 'Tom', race: startsWith('Bea')));
     });
 }
 ```
