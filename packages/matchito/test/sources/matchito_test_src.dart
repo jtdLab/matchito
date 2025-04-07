@@ -23,10 +23,11 @@ Matcher isBar({Object? bam = _sentinel, Object? baz = _sentinel}) {
   return matcher;
 }
 
-Matcher isBaz(
-    {Object? quick = _sentinel,
-    Object? bam = _sentinel,
-    Object? baz = _sentinel}) {
+Matcher isBaz({ 
+  Object? quick = _sentinel,
+  Object? bam = _sentinel,
+  Object? baz = _sentinel
+}) {
   var matcher = isA<Baz>();
 
   if (quick != _sentinel) {
