@@ -50,6 +50,7 @@ class MatchitoGenerator extends GeneratorForAnnotation<Matchito> {
         ...?typeElement?.fields
             .where(
               (field) =>
+                  !field.hasInternal &&
                   !field.isStatic &&
                   field.name != 'copyWith' &&
                   field.name != 'hashCode' &&
@@ -61,6 +62,7 @@ class MatchitoGenerator extends GeneratorForAnnotation<Matchito> {
             .expand((supertype) => supertype.element.fields)
             .where(
               (field) =>
+                  !field.hasInternal &&
                   !field.isStatic &&
                   field.name != 'copyWith' &&
                   field.name != 'hashCode' &&

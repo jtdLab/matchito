@@ -2,6 +2,7 @@
 
 import 'package:matchito_annotation/matchito_annotation.dart';
 import 'package:source_gen_test/annotations.dart';
+import 'package:meta/meta.dart';
 
 @ShouldGenerate(
   r'''
@@ -67,4 +68,6 @@ class Baz extends Bar {
   Baz({required this.quick, required super.bam, super.baz});
   final String quick;
   final int copyWith = 0;
+  @internal
+  final String internalName = 'Hello';
 }
