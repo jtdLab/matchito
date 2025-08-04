@@ -1,6 +1,10 @@
+// TODO(Jonas): rm later
+// ignore_for_file: deprecated_member_use
+
 import 'dart:async';
 
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:build/src/builder/build_step.dart';
 import 'package:matchito_annotation/matchito_annotation.dart';
 import 'package:source_gen/source_gen.dart';
@@ -10,7 +14,7 @@ class MatchitoGenerator extends GeneratorForAnnotation<Matchito> {
 
   @override
   Stream<String> generateForAnnotatedElement(
-    Element element,
+    Element2 element,
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
