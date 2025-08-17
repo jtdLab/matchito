@@ -53,24 +53,24 @@ class MatchitoGenerator extends GeneratorForAnnotation<Matchito> {
         ...?typeElement?.fields
             .where(
               (field) =>
-                  !field.hasInternal &&
+                  !field.metadata.hasInternal &&
                   !field.isStatic &&
                   field.name != 'copyWith' &&
                   field.name != 'hashCode' &&
                   field.name != 'runtimeType' &&
-                  !field.name.startsWith('_'),
+                  !(field.name?.startsWith('_') ?? false),
             )
             .map((field) => field.name),
         ...?typeElement?.allSupertypes
             .expand((supertype) => supertype.element.fields)
             .where(
               (field) =>
-                  !field.hasInternal &&
+                  !field.metadata.hasInternal &&
                   !field.isStatic &&
                   field.name != 'copyWith' &&
                   field.name != 'hashCode' &&
                   field.name != 'runtimeType' &&
-                  !field.name.startsWith('_'),
+                  !(field.name?.startsWith('_') ?? false),
             )
             .map((field) => field.name),
       };
