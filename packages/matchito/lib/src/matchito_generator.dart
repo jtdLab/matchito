@@ -26,17 +26,16 @@ class MatchitoGenerator extends GeneratorForAnnotation<Matchito> {
       );
     }
 
-    final types =
-        matchitoAnnotation.listValue.map((dartObject) {
-          final type = dartObject.toTypeValue();
-          if (type == null) {
-            throw InvalidGenerationSourceError(
-              'All elements in the "type" list must be valid types.',
-              element: element,
-            );
-          }
-          return type;
-        }).toList();
+    final types = matchitoAnnotation.listValue.map((dartObject) {
+      final type = dartObject.toTypeValue();
+      if (type == null) {
+        throw InvalidGenerationSourceError(
+          'All elements in the "type" list must be valid types.',
+          element: element,
+        );
+      }
+      return type;
+    }).toList();
 
     if (types.isEmpty) {
       throw InvalidGenerationSourceError(
