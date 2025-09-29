@@ -4,7 +4,6 @@
 import 'dart:async';
 
 import 'package:analyzer/dart/element/element.dart';
-import 'package:analyzer/dart/element/element2.dart';
 import 'package:build/src/builder/build_step.dart';
 import 'package:matchito_annotation/matchito_annotation.dart';
 import 'package:source_gen/source_gen.dart';
@@ -14,7 +13,7 @@ class MatchitoGenerator extends GeneratorForAnnotation<Matchito> {
 
   @override
   Stream<String> generateForAnnotatedElement(
-    Element2 element,
+    Element element,
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
