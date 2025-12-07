@@ -40,7 +40,7 @@ class MatchitoGenerator extends GeneratorForAnnotation<Matchito> {
       );
     }
 
-    final buffer = ['const _sentinel = Object();\n'];
+    final buffer = [];
 
     for (final type in types) {
       final typeName = type.getDisplayString();

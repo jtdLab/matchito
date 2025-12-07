@@ -11,6 +11,8 @@ Builder matchito(BuilderOptions options) {
     header: '''
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
+
+const _sentinel = Object();
 ''',
     options: options,
   );
