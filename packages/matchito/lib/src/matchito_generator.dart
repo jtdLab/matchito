@@ -13,7 +13,7 @@ class MatchitoGenerator extends GeneratorForAnnotation<Matchito> {
     Element element,
     ConstantReader annotation,
     BuildStep buildStep,
-  ) {
+  ) async* {
     final matchitoAnnotation = annotation.peek('types');
     if (matchitoAnnotation == null || !matchitoAnnotation.isList) {
       throw InvalidGenerationSourceError(
@@ -39,6 +39,8 @@ class MatchitoGenerator extends GeneratorForAnnotation<Matchito> {
         element: element,
       );
     }
+
+    yield 'const _sentinel = Object();\n';
 
     final buffer = [];
 
@@ -95,6 +97,6 @@ class MatchitoGenerator extends GeneratorForAnnotation<Matchito> {
       }
     }
 
-    return Stream.value(buffer.join('\n'));
+    yield* Stream.value(buffer.join('\n'));
   }
 }
